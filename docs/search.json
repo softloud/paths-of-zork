@@ -1,19 +1,5 @@
 [
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "a visual diary of pathfinding in zork",
-    "section": "",
-    "text": "Visual Diary\n\n\n\n\n\n\nzork\n\n\nR\n\n\n\n\n\n\n\n\n\nOct 26, 2024\n\n\nCharles T. Gray\n\n\n\n\n\n\n\n\n\n\n\n\nPlotting Paths as Graphs\n\n\n\n\n\n\nzork\n\n\nR\n\n\n\n\n\n\n\n\n\nOct 22, 2024\n\n\nCharles T. Gray\n\n\n\n\n\n\n\n\n\n\n\n\nOrigin Story\n\n\n\n\n\n\nzork\n\n\n\n\n\n\n\n\n\nOct 21, 2024\n\n\nCharles T. Gray\n\n\n\n\n\n\nNo matching items"
-  },
-  {
-    "objectID": "posts/diary-init/index.html",
-    "href": "posts/diary-init/index.html",
-    "title": "Visual Diary",
-    "section": "",
-    "text": "library(tidyverse)\n\nhere::here()\n\n[1] \"/home/cantabile/Documents/repos/zork\"\n\ngetwd()\n\n[1] \"/home/cantabile/Documents/repos/zork/posts/diary-init\"\n\n\n\nread_tsv(\n  paste0(here::here(), 'raw_data/zork-graph-data - edgepairs.tsv'),\n  show_col_types = FALSE) %&gt;%\n  gt::gt()\n\nError: '/home/cantabile/Documents/repos/zorkraw_data/zork-graph-data - edgepairs.tsv' does not exist.\n\n\nSo now I need better data capture, and a better way of organising my code. Currently I have data in zork/data."
-  },
-  {
     "objectID": "posts/plot-init/index.html",
     "href": "posts/plot-init/index.html",
     "title": "Plotting Paths as Graphs",
@@ -26,5 +12,54 @@
     "title": "Origin Story",
     "section": "",
     "text": "Zork was just a little bit before my time, and although I was an avid fan of successors of Zork, I commented I had never played it when a colleague and I were discussing what we were playing. For him, it’s nostalgia, he pinged me a link and out of curiosity I checked it out.\nWhat blew me away about my first playthrough was how immersive the game is. Nothing but text, and yet I got that rush like I did back in the eighties. My imagination flexed that unloved but well-honed muscle where the text-based interface transports me to a world where anything is possible.\nThese games are sort of on a grid, where you can go west, for example, using the text-based interface. However, locations can open up myriad pathways, such as the cellar in Zork, so the navigation system does not map spatially to a grid.\nDirected graphs seem the best way, but the directionality is important in terms of functionality in the game. During my first adventure, where I was eventually felled in my nth fight with the troll, I began to sketch graphs in my notebook.\nI knew I’d need to plot these graphs before long, and I was right. My second playthrough was dominated by developing a good enough visualisation.\n\n\n\nPlaythrough 2024-10-21"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "a visual diary of pathfinding in zork",
+    "section": "",
+    "text": "Visual Diary\n\n\n\n\n\n\nzork\n\n\nR\n\n\n\n\n\n\n\n\n\nOct 26, 2024\n\n\nCharles T. Gray\n\n\n\n\n\n\n\n\n\n\n\n\nPlotting Paths as Graphs\n\n\n\n\n\n\nzork\n\n\nR\n\n\n\n\n\n\n\n\n\nOct 22, 2024\n\n\nCharles T. Gray\n\n\n\n\n\n\n\n\n\n\n\n\nOrigin Story\n\n\n\n\n\n\nzork\n\n\n\n\n\n\n\n\n\nOct 21, 2024\n\n\nCharles T. Gray\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "This is how I am relaxing at the moment. There’s something about the mix of graph plotting and text-based adventure gameplay that I am finding very soothing at the moment. I make no commitments to updates or completeness; this is a hobby project I am making to relax, for me. If other people get something out of it, that’s a bonus."
+  },
+  {
+    "objectID": "about.html#why-does-this-exist",
+    "href": "about.html#why-does-this-exist",
+    "title": "About",
+    "section": "",
+    "text": "This is how I am relaxing at the moment. There’s something about the mix of graph plotting and text-based adventure gameplay that I am finding very soothing at the moment. I make no commitments to updates or completeness; this is a hobby project I am making to relax, for me. If other people get something out of it, that’s a bonus."
+  },
+  {
+    "objectID": "about.html#i-have-been-in-love-with-graphs-for-many-years",
+    "href": "about.html#i-have-been-in-love-with-graphs-for-many-years",
+    "title": "About",
+    "section": "I have been in love with graphs for many years",
+    "text": "I have been in love with graphs for many years"
+  },
+  {
+    "objectID": "about.html#me-and-text-based-adventure-games",
+    "href": "about.html#me-and-text-based-adventure-games",
+    "title": "About",
+    "section": "Me and text-based adventure games",
+    "text": "Me and text-based adventure games"
+  },
+  {
+    "objectID": "about.html#from-the-depths-of-solitude",
+    "href": "about.html#from-the-depths-of-solitude",
+    "title": "About",
+    "section": "From the depths of solitude",
+    "text": "From the depths of solitude\nI am spending time exploring where I arrive when I’m intentionally spending time in solitude. This is what I end up doing with my time. Go figure."
+  },
+  {
+    "objectID": "posts/diary-init/index.html",
+    "href": "posts/diary-init/index.html",
+    "title": "Visual Diary",
+    "section": "",
+    "text": "library(tidyverse)\n\nhere::here()\n\n[1] \"/home/cantabile/Documents/repos/zork\"\n\ngetwd()\n\n[1] \"/home/cantabile/Documents/repos/zork/posts/diary-init\"\n\n\n\nread_tsv(\n  paste0(here::here(), 'raw_data/zork-graph-data - edgepairs.tsv'),\n  show_col_types = FALSE) %&gt;%\n  gt::gt()\n\nError: '/home/cantabile/Documents/repos/zorkraw_data/zork-graph-data - edgepairs.tsv' does not exist.\n\n\nSo now I need better data capture, and a better way of organising my code. Currently I have data in zork/data."
   }
 ]

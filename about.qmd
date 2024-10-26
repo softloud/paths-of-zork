@@ -10,7 +10,7 @@ about:
     - icon: github
       text: Github
       # to do after repo is created
-      href: https://github.com
+      href: https://github.com/softloud/paths-of-zork
 ---
 
 ## Why does this exist? 
