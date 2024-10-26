@@ -1,0 +1,30 @@
+---
+title: "Visual Diary"
+author: "Charles T. Gray"
+date: "Playthrough 2024-10-26"
+categories: 
+  - zork
+  - R
+# image: "../../img/2024-10-22--zork-graph.png"
+---
+
+```{r message=FALSE}
+library(tidyverse)
+
+here::here()
+
+getwd()
+```
+
+```{r error=TRUE}
+
+
+read_tsv(
+  paste0(here::here(), 'raw_data/zork-graph-data - edgepairs.tsv'),
+  show_col_types = FALSE) %>%
+  gt::gt()
+
+```
+
+So now I need better data capture, and a better way of organising my code. Currently I have data in `zork/data`. 
+

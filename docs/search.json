@@ -1,0 +1,30 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "a visual diary of pathfinding in zork",
+    "section": "",
+    "text": "Visual Diary\n\n\n\n\n\n\nzork\n\n\nR\n\n\n\n\n\n\n\n\n\nOct 26, 2024\n\n\nCharles T. Gray\n\n\n\n\n\n\n\n\n\n\n\n\nPlotting Paths as Graphs\n\n\n\n\n\n\nzork\n\n\nR\n\n\n\n\n\n\n\n\n\nOct 22, 2024\n\n\nCharles T. Gray\n\n\n\n\n\n\n\n\n\n\n\n\nOrigin Story\n\n\n\n\n\n\nzork\n\n\n\n\n\n\n\n\n\nOct 21, 2024\n\n\nCharles T. Gray\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "posts/diary-init/index.html",
+    "href": "posts/diary-init/index.html",
+    "title": "Visual Diary",
+    "section": "",
+    "text": "library(tidyverse)\n\nhere::here()\n\n[1] \"/home/cantabile/Documents/repos/zork\"\n\ngetwd()\n\n[1] \"/home/cantabile/Documents/repos/zork/posts/diary-init\"\n\n\n\nread_tsv(\n  paste0(here::here(), 'raw_data/zork-graph-data - edgepairs.tsv'),\n  show_col_types = FALSE) %&gt;%\n  gt::gt()\n\nError: '/home/cantabile/Documents/repos/zorkraw_data/zork-graph-data - edgepairs.tsv' does not exist.\n\n\nSo now I need better data capture, and a better way of organising my code. Currently I have data in zork/data."
+  },
+  {
+    "objectID": "posts/plot-init/index.html",
+    "href": "posts/plot-init/index.html",
+    "title": "Plotting Paths as Graphs",
+    "section": "",
+    "text": "Second playthrough was all about getting the graphs into a script. But for about an hour or so I did play, and it was so satisfying seeing the graph grow as I played and collected data points.\n\n\n\nPlaythrough 2024-10-22\n\n\nHowever, I knew my next playthrough would need a better data capture system. First I tried a google sheet, but hit a wall trying to read the data from the url. I think I’ll give it another try, as I like the interface for input of categorical variables.\nOf course, in the end, I went down a rabbit hole of prettifying the vis, and I’m reasonably happy with my efforts for one session."
+  },
+  {
+    "objectID": "posts/origin-story/index.html",
+    "href": "posts/origin-story/index.html",
+    "title": "Origin Story",
+    "section": "",
+    "text": "Zork was just a little bit before my time, and although I was an avid fan of successors of Zork, I commented I had never played it when a colleague and I were discussing what we were playing. For him, it’s nostalgia, he pinged me a link and out of curiosity I checked it out.\nWhat blew me away about my first playthrough was how immersive the game is. Nothing but text, and yet I got that rush like I did back in the eighties. My imagination flexed that unloved but well-honed muscle where the text-based interface transports me to a world where anything is possible.\nThese games are sort of on a grid, where you can go west, for example, using the text-based interface. However, locations can open up myriad pathways, such as the cellar in Zork, so the navigation system does not map spatially to a grid.\nDirected graphs seem the best way, but the directionality is important in terms of functionality in the game. During my first adventure, where I was eventually felled in my nth fight with the troll, I began to sketch graphs in my notebook.\nI knew I’d need to plot these graphs before long, and I was right. My second playthrough was dominated by developing a good enough visualisation.\n\n\n\nPlaythrough 2024-10-21"
+  }
+]

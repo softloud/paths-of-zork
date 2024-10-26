@@ -1,0 +1,11 @@
+perspective_location	perspective_to_target	target_location	playthrough
+west of house	north	north of house	2024-10-22
+north of house	north	forest path	2024-10-22
+forest path	north	clearin	2024-10-22
+clearing	north	forest	2024-10-22
+clearing	east	forest	2024-10-22
+clearing	west	forest	2024-10-22
+forest path	east	forest	2024-10-22
+forest path	west	forest	2024-10-22
+north of house	east	behind house	2024-10-22
+behind house	west	house	2024-10-22

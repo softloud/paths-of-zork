@@ -1,0 +1,26 @@
+---
+title: "About"
+image: "posts/plot-init/2024-10-22--zork-graph.png"
+about:
+  template: trestles
+  links:
+    - icon: linkedin
+      text: LinkedIn
+      href: https://www.linkedin.com/in/charles-t-gray/
+    - icon: github
+      text: Github
+      # to do after repo is created
+      href: https://github.com
+---
+
+## Why does this exist? 
+
+This is how I am relaxing at the moment. There's something about the mix of graph plotting and text-based adventure gameplay that I am finding very soothing at the moment. I make no commitments to updates or completeness; this is a hobby project I am making to relax, for me. If other people get something out of it, that's a bonus. 
+
+## I have been in love with graphs for many years
+
+## Me and text-based adventure games
+
+## From the depths of solitude
+
+I am spending time exploring where I arrive when I'm intentionally spending time in solitude. This is what I end up doing with my time. Go figure. 

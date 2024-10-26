@@ -1,0 +1,26 @@
+/*-- scss:defaults --*/
+$body-font-family: 'Courier New', Courier, monospace !default;
+$headings-font-family: 'Courier New', Courier, monospace !default;
+
+/*-- scss:rules --*/
+body {
+  font-family: $body-font-family;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: $headings-font-family;
+}
+
+p, a, li, blockquote, code, pre, span {
+  font-family: $body-font-family;
+}
+
+/* Additional rules for blog post headings and short text */
+.post-title, .post-excerpt, .post-content {
+  font-family: $body-font-family;
+}
+
+/* Additional rules for the top right menu */
+.navbar .nav-link, .navbar .navbar-brand {
+  font-family: $body-font-family;
+}

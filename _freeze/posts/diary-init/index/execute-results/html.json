@@ -1,0 +1,15 @@
+{
+  "hash": "3ce6eb2a0df14a62a50cd5a936600616",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"Visual Diary\"\nauthor: \"Charles T. Gray\"\ndate: \"Playthrough 2024-10-26\"\ncategories: [zork, R]\n# image: \"../../img/2024-10-22--zork-graph.png\"\n---\n\n::: {.cell}\n\n```{.r .cell-code}\nlibrary(tidyverse)\n\nhere::here()\n```\n\n::: {.cell-output .cell-output-stdout}\n\n```\n[1] \"/home/cantabile/Documents/repos/zork\"\n```\n\n\n:::\n\n```{.r .cell-code}\ngetwd()\n```\n\n::: {.cell-output .cell-output-stdout}\n\n```\n[1] \"/home/cantabile/Documents/repos/zork/posts/diary-init\"\n```\n\n\n:::\n:::\n\n::: {.cell}\n\n```{.r .cell-code}\nread_tsv(\n  paste0(here::here(), 'raw_data/zork-graph-data - edgepairs.tsv'),\n  show_col_types = FALSE) %>%\n  gt::gt()\n```\n\n::: {.cell-output .cell-output-error}\n\n```\nError: '/home/cantabile/Documents/repos/zorkraw_data/zork-graph-data - edgepairs.tsv' does not exist.\n```\n\n\n:::\n:::\n\n\nSo now I need better data capture, and a better way of organising my code. Currently I have data in `zork/data`. \n\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

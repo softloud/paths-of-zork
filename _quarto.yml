@@ -1,0 +1,23 @@
+project:
+  type: website
+  output-dir: docs
+
+website:
+  title: "paths of zork"
+  navbar:
+    right:
+      - about.qmd
+      - icon: github
+        href: https://github.com/
+      - icon: linkedin
+        href: https://www.linkedin.com/in/charles-t-gray/
+format:
+  html:
+    theme: 
+      - slate
+      - custom.scss
+    css: styles.css
+    
+
+
+
