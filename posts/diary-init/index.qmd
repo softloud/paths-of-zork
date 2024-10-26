@@ -11,20 +11,462 @@ categories:
 ```{r message=FALSE}
 library(tidyverse)
 
-here::here()
-
-getwd()
 ```
+
+So now I need better data capture than editing the raw tsv, and a better way of organising my code. Currently I have data in `zork/data`. 
+
+Already I see I need to split the data into two datasets. One where each row is uniquely defined by node 
+
+```{r }
+read_tsv(
+  paste0(here::here(), '/raw_data/zork-nodes.tsv'),
+  show_col_types = FALSE) %>%
+  head() |> # why has my keybinding for pipe stopped working? argh
+  gt::gt()
+
+```
+
+and one where each row is uniquely defined by edge.
+
 
 ```{r error=TRUE}
 
 
 read_tsv(
-  paste0(here::here(), 'raw_data/zork-graph-data - edgepairs.tsv'),
+  paste0(here::here(), '/raw_data/zork-edges.tsv'),
   show_col_types = FALSE) %>%
+  head() |>
   gt::gt()
 
 ```
 
-So now I need better data capture, and a better way of organising my code. Currently I have data in `zork/data`. 
 
+No doubt there will be other things. (Do I need a dataset for region?)
+
+## Instantiate the data
+
+I will create a new dataset for this, but use the original playthrough as the template. 
+
+```{r}
+# Create an empty dataframe for edges
+
+zork_edges <- tibble(
+  perspective_location = character(),
+  perspective_to_target = character(),
+  target_location = character()
+)
+
+zork_edges
+
+# Create an empty dataframe for nodes
+
+zork_nodes <- tibble(
+  perspective_location = character(),
+  region = character(),
+  interactivity = character(),
+  loot = character()
+)
+
+zork_nodes
+
+
+```
+
+## Update the data
+
+I could do something fancy, but I think I'll go with `add_row` to update the data. Let's add one row for the start.
+
+```{r}
+# Set levels of columns
+
+locations <- list(
+  unexplored = 'unexplored',
+  west_of_house = 'west of house',
+  north_of_house = 'north of house',
+  forest = 'forest',
+  clearing = 'clearing',
+  forest_path = 'forest path',
+  behind_house = 'behind house', 
+  south_of_house = 'south of house',
+  kitchen = 'kitchen',
+  living_room = 'living room',
+  attic = 'attic',
+  canyon_view = 'canyon view',
+  rocky_ledge = 'rocky ledge',
+  cellar = 'cellar',
+  inaccessible = 'inaccessible',
+  east_of_chasm = 'east of chasm',
+  gallery = 'gallery',
+  studio = 'studio'
+) 
+
+directions <- list(
+  north = 'north',
+  south = 'south',
+  east = 'east',
+  west = 'west',
+  up = 'up',
+  down = 'down'
+)
+
+regions <- list(
+  unexplored = 'unexplored',
+  forest = 'forest',
+  house = 'house',
+  cellar = 'cellar'
+  )
+
+```
+
+
+```{r}
+unknown = 'unknown'
+
+zork_nodes <- zork_nodes |>
+  add_row(
+    perspective_location = locations$west_of_house,
+    region = regions$forest,
+    interactivity = 'solved: mailbox',
+    loot = 'leaflet'
+  ) |>
+    add_row(
+    perspective_location = locations$north_of_house,
+    region = regions$forest,
+    interactivity = 'none',
+    loot = 'none'
+  ) |>
+  add_row(
+    perspective_location = locations$forest,
+    region = regions$forest,
+    interactivity = 'song bird?',
+    loot = 'none'    
+  ) |>
+  add_row(
+    perspective_location = locations$clearing,
+    region = regions$forest,
+    interactivity = 'unsolved: pile of leaves',
+    loot = 'none'    
+  )  |>
+  add_row(
+    perspective_location = locations$forest_path,
+    region = regions$forest,
+    interactivity = 'none',
+    loot = 'none'    
+  ) |>
+  add_row(
+    perspective_location = locations$behind_house,
+    region = regions$forest,
+    interactivity = 'window to house',
+    loot = 'none'    
+  ) |>
+  add_row(
+    perspective_location = locations$south_of_house,
+    region = regions$forest,
+    interactivity = 'none',
+    loot = 'none'    
+  ) |>
+  add_row(
+    perspective_location = locations$kitchen,
+    region = regions$house,
+    interactivity = 'sack',
+    loot = 'water, lunch, garlic'    
+  ) |>
+  add_row(
+    perspective_location = locations$living_room,
+    region = regions$house,
+    interactivity = 'rug, locked door to west',
+    loot = 'sword, lantern'    
+  ) |>
+  add_row(
+    perspective_location = locations$attic,
+    region = regions$house,
+    interactivity = 'none',
+    loot = 'rope, knife'    
+  ) |>
+  add_row(
+    perspective_location = locations$unexplored,
+    region = unknown,
+    interactivity = unknown,
+    loot = unknown
+  ) |>
+  add_row(
+    perspective_location = locations$canyon_view,
+    region = regions$forest,
+    interactivity = 'none',
+    loot = 'none'
+  ) |>
+  add_row(
+    perspective_location = locations$rocky_ledge,
+    region = regions$forest,
+    interactivity = 'none',
+    loot = 'none'
+  ) |>
+  add_row(
+    perspective_location = locations$cellar,
+    region = regions$cellar,
+    interactivity = 'none',
+    loot = 'none'
+  ) |>
+  add_row(
+    perspective_location = locations$inacessible,
+    region = regions$unknown,
+    interactivity = 'none',
+    loot = 'none'
+  ) |>
+  add_row(
+    perspective_location = locations$east_of_chasm,
+    region = regions$cellar,
+    interactivity = 'none',
+    loot = 'none'
+  ) |>
+  add_row(
+    perspective_location = locations$gallery,
+    region = regions$cellar,
+    interactivity = 'painting',
+    loot = 'none'
+  ) |>
+  add_row(
+    perspective_location = locations$studio,
+    region = regions$cellar,
+    interactivity = 'note, 69 colours',
+    loot = 'none'
+  )
+
+
+
+```
+
+```{r}
+
+zork_edges <- zork_edges |>
+  add_row(
+    perspective_location = locations$west_of_house,
+    perspective_to_target = directions$north,
+    target_location = locations$north_of_house
+  ) |>
+  add_row(
+    perspective_location = locations$west_of_house,
+    perspective_to_target = directions$west,
+    target_location = locations$forest
+  ) |>
+  add_row(
+    perspective_location = locations$forest,
+    perspective_to_target = directions$north,
+    target_location = locations$clearing
+  ) |>
+  add_row(
+    perspective_location = locations$clearing,
+    perspective_to_target = directions$west,
+    target_location = locations$forest
+  ) |>
+  add_row(
+    perspective_location = locations$clearing,
+    perspective_to_target = directions$south,
+    target_location = locations$forest_path
+  ) |>
+  add_row(
+    perspective_location = locations$forest_path,
+    perspective_to_target = directions$south,
+    target_location = locations$north_of_house
+  ) |>
+  add_row(
+    perspective_location = locations$north_of_house,
+    perspective_to_target = directions$east,
+    target_location = locations$behind_house
+  ) |>
+  add_row(
+    perspective_location = locations$behind_house,
+    perspective_to_target = directions$south,
+    target_location = locations$south_of_house
+  ) |>
+  add_row(
+    perspective_location = locations$south_of_house,
+    perspective_to_target = directions$south,
+    target_location = locations$forest
+  ) |>
+  add_row(
+    perspective_location = locations$behind_house,
+    perspective_to_target = directions$west,
+    target_location = locations$kitchen
+  ) |>
+  add_row(
+    perspective_location = locations$kitchen,
+    perspective_to_target = directions$west,
+    target_location = locations$living_room
+  ) |>
+  add_row(
+    perspective_location = locations$kitchen,
+    perspective_to_target = directions$up,
+    target_location = locations$attic
+  ) |>
+  add_row(
+    perspective_location = locations$living_room,
+    perspective_to_target = directions$west,
+    target_location = locations$inaccessible
+  ) |>
+  add_row(
+    perspective_location = locations$west_of_house,
+    perspective_to_target = directions$south,
+    target_location = locations$south_of_house
+  ) |>
+  add_row(
+    perspective_location = locations$south_of_house,
+    perspective_to_target = directions$east,
+    target_location = locations$behind_house
+  ) |>
+  add_row(
+    perspective_location = locations$behind_house,
+    perspective_to_target = directions$east,
+    target_location = locations$clearing
+  ) |>
+  add_row(
+    perspective_location = locations$clearing,
+    perspective_to_target = directions$east,
+    target_location = locations$canyon_view
+  ) |>
+  add_row(
+    perspective_location = locations$canyon_view,
+    perspective_to_target = directions$down,
+    target_location = locations$rocky_ledge
+  ) |>
+  add_row(
+    perspective_location = locations$kitchen,
+    perspective_to_target = directions$down,
+    target_location = locations$cellar
+  ) |>
+  add_row(
+    perspective_location = locations$cellar,
+    perspective_to_target = directions$north,
+    target_location = locations$unexplored
+  ) |>
+  add_row(
+    perspective_location = locations$cellar,
+    perspective_to_target = directions$south,
+    target_location = locations$east_of_chasm
+  ) |>
+  add_row(
+    perspective_location = locations$east_of_chasm,
+    perspective_to_target = directions$east,
+    target_location = locations$gallery
+  ) |>
+  add_row(
+    perspective_location = locations$cellar,
+    perspective_to_target = directions$west,
+    target_location = locations$inaccessible
+  ) |> 
+  add_row(
+    perspective_location = locations$gallery,
+    perspective_to_target = directions$north,
+    target_location = locations$studio
+  ) |> 
+  add_row(
+    perspective_location = locations$studio,
+    perspective_to_target = directions$up,
+    target_location = locations$unexplored
+  )
+
+zork_edges
+
+```
+
+
+## Instantiate the plot
+
+I wonder if I can join the nodes dataframe to the nodes of the ggraph object? 
+
+### Create graph object
+
+
+```{r}
+library(tidygraph)
+
+zork_base_graph <- 
+  zork_edges |> 
+    mutate(
+      from = perspective_location,
+      to = target_location
+    ) |>
+    # does order matter?
+    select(from, to, everything()) |>
+    as_tbl_graph()
+
+
+```
+
+
+```{r}
+# Join the nodes data frame to the nodes of the graph
+zork_graph <- zork_base_graph |>
+  activate(nodes) |>
+  # add attributes to nodes
+  left_join(zork_nodes, by = c("name" = "perspective_location"))
+
+# Display the graph
+zork_graph
+
+
+```
+
+### Plot the graph object
+
+
+```{r fig.height = 12, fig.width=12}
+library(ggraph)
+
+
+n_regions <- length(regions)
+
+cols_f <- colorRampPalette(RColorBrewer::brewer.pal(8, 'Dark2'))
+
+
+zork_graph |>
+  ggraph() +
+    geom_edge_fan(aes(label = perspective_to_target), 
+      alpha = 0.2, 
+      angle_calc = 'along',
+      label_colour = 'grey',
+      label_dodge = unit(2.5, 'mm'),
+      arrow = arrow(length = unit(2, 'mm')), 
+      end_cap = circle(1, 'cm')) +
+    geom_node_point(aes(colour = region), size = 50, alpha = 0.1) +
+    geom_node_text(aes(label = name, colour = region),
+      alpha = 0.9) +
+   theme_minimal() +
+  scale_edge_colour_manual(values = cols_f(n_regions)) + 
+    scale_colour_manual(values = cols_f(n_regions)) +
+    theme(
+      plot.background = element_rect(colour = "#F5DEB3"),
+      legend.position = 'bottom',
+      text = element_text(family = "Courier", size = 20),
+      axis.ticks = element_blank(),
+      axis.text = element_blank(),
+      panel.grid = element_blank()
+    ) + 
+    labs(
+      title = "Paths of Zork",
+      subtitle = "Playthrough 3 (2024-10-26)",
+      caption = "Angle of edge determined by ggraph, not direction",
+      x = "",
+      y = ""
+    ) 
+
+```
+
+## Display the loot 
+
+```{r}
+library(gt)
+
+zork_nodes |>
+  gt()
+
+
+```
+
+## Finally! I can play! 
+
+Now to add rows and watch the plot update. 
+
+### At 13 locations discovered
+
+Next time will try using a google sheet and scraping it. Is too cumbersome coding. But will have to get workflow for setting levels of categorical variables. 

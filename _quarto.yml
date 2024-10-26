@@ -17,6 +17,7 @@ format:
       - slate
       - custom.scss
     css: styles.css
+    code-fold: true
     
 
 

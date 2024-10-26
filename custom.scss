@@ -5,22 +5,27 @@ $headings-font-family: 'Courier New', Courier, monospace !default;
 /*-- scss:rules --*/
 body {
   font-family: $body-font-family;
+  color: white; /* Set font color to white */
 }
 
 h1, h2, h3, h4, h5, h6 {
   font-family: $headings-font-family;
+  color: white; /* Set font color to white */
 }
 
 p, a, li, blockquote, code, pre, span {
   font-family: $body-font-family;
+  color: white; /* Set font color to white */
 }
 
 /* Additional rules for blog post headings and short text */
 .post-title, .post-excerpt, .post-content {
   font-family: $body-font-family;
+  color: white; /* Set font color to white */
 }
 
 /* Additional rules for the top right menu */
 .navbar .nav-link, .navbar .navbar-brand {
   font-family: $body-font-family;
+  color: white; /* Set font color to white */
 }

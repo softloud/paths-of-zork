@@ -17,6 +17,8 @@ about:
 
 This is how I am relaxing at the moment. There's something about the mix of graph plotting and text-based adventure gameplay that I am finding very soothing at the moment. I make no commitments to updates or completeness; this is a hobby project I am making to relax, for me. If other people get something out of it, that's a bonus. 
 
+## How is this made?
+
 ## I have been in love with graphs for many years
 
 ## Me and text-based adventure games
