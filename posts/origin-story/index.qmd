@@ -1,5 +1,6 @@
 ---
 title: "Origin Story"
+subtitle: "Playthrough 1"
 author: "Charles T. Gray"
 date: "Playthrough 2024-10-21"
 categories: [zork]

@@ -15,14 +15,49 @@ about:
 
 ## Why does this exist? 
 
-This is how I am relaxing at the moment. There's something about the mix of graph plotting and text-based adventure gameplay that I am finding very soothing at the moment. I make no commitments to updates or completeness; this is a hobby project I am making to relax, for me. If other people get something out of it, that's a bonus. 
+This is how I am relaxing at the moment. 
+
+There's something about the mix of graph plotting and text-based adventure gameplay that I am finding very soothing at the moment. I make no commitments to updates or completeness; this is a hobby project I am making to relax, just for me. If other people get something out of it, that's a bonus. 
+
+I enjoy watching the graphs populate as I play, and can never stop tweaking to make improvements to the visualisation tool.
 
 ## How is this made?
 
+A blog using Quarto's slate theme. Visualisations created using a combination of R packages:
+
+package | purpose 
+---|---------
+tidyverse | workhouse datasci toolkit
+tidygraph | transform dataframe to ggraph input
+ggraph | plots ggraph
+gganimate | when I get to animation
+
+> todo: add links
+
+### Why R?
+
+I wanted to be able to plot graphs with the customisation options of ggplot.
+
 ## I have been in love with graphs for many years
+
+At some point will write up with links to that slide deck from my abstract algebra work, and the paper. 
 
 ## Me and text-based adventure games
 
+My love of this genre goes deep. Things I should nostalgia about at some point
+
+- Lone Wolf RPG choose your own adventure
+- Sierra Online games of the mid eightes to early nineties
+- fantasy and scifi novels
+
+Point is, I'm primed to fall in love with Zork. 
+
+
 ## From the depths of solitude
 
-I am spending time exploring where I arrive when I'm intentionally spending time in solitude. This is what I end up doing with my time. Go figure. 
+I am spending time exploring where I arrive when I'm intentionally spending time in solitude. Been listening to things like Solo: The Single Person's Guide to Living a Remarkable Life. 
+
+I'm in early career, still counting on one hand years since I submitted my doctorate; and this was a second career, so I am older than most graduates. It's hard fought that finally I love my job, my neighbourhood, my city, my lifestyle. I decided to open up lots of space in my life to see what I'd do with solitude. I felt like I'd lost creative spark towards the end of my doctorate. So, I decided to remove all expectation of professional betterment in my spare time and just see what I felt like doing. 
+
+This is what I end up doing on weekends. All week, I've looked forward to coming home to do this. Go figure. 
+

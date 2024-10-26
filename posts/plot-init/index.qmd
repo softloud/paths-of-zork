@@ -1,5 +1,6 @@
 ---
 title: "Plotting Paths as Graphs"
+subtitle: "Playthrough 2"
 author: "Charles T. Gray"
 date: "Playthrough 2024-10-22"
 categories: [zork, R]
