@@ -1,0 +1,22 @@
+perspective_location	region	interactivity	loot
+west of house	forest	solved: mailbox	leaflet
+north of house	forest	none	none
+forest	forest	song bird?	none
+clearing	forest	unsolved: pile of leaves	none
+forest path	forest	none	none
+behind house	forest	window to house	none
+south of house	forest	none	none
+kitchen	house	sack	water, lunch, garlic
+living room	house	rug, locked door to west	sword, lantern
+attic	house	none	rope, knife
+unexplored	unexplored	unknown	unknown
+canyon view	forest	none	none
+rocky ledge	forest	none	none
+cellar	cellar	none	none
+inaccessible	unexplored	none	none
+east of chasm	cellar	none	none
+gallery	cellar	painting	none
+studio	cellar	note, 69 colours	none
+the troll room	cellar	troll	none
+maze	cellar	unknown	unknown
+east west passageway	cellar	unknown	unknown

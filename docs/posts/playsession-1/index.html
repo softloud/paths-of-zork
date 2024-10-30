@@ -6,8 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Charles T. Gray">
+<meta name="dcterms.date" content="2024-10-22">
 
-<title>paths of zork - a visual diary of pathfinding in zork</title>
+<title>paths of zork - Plotting Paths as Graphs</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,24 +25,22 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-listing/list.min.js"></script>
-<script src="site_libs/quarto-listing/quarto-listing.js"></script>
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="dark">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -68,77 +68,19 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<script>
 
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-listing .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
 
-    const options = {
-      valueNames: ['listing-date','listing-title','listing-author','listing-subtitle','listing-image','listing-description','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
-      
-      searchColumns: ["listing-date","listing-title","listing-author","listing-subtitle","listing-image","listing-description","listing-categories"],
-    };
-
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  </script>
-
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
-
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="../../styles.css">
 </head>
 
-<body class="nav-fixed">
+<body class="nav-fixed fullcontent">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top quarto-banner">
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">paths of zork</span>
     </a>
   </div>
@@ -149,7 +91,7 @@ window.Quarto = {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./about.html"> 
+    <a class="nav-link" href="../../about.html"> 
 <span class="menu-text">About</span></a>
   </li>  
   <li class="nav-item compact">
@@ -172,191 +114,61 @@ window.Quarto = {
 <!-- content -->
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
-    <div class="quarto-title column-page-left">
-      <h1 class="title">a visual diary of pathfinding in zork</h1>
-                      </div>
+    <div class="quarto-title column-body">
+      <h1 class="title">Plotting Paths as Graphs</h1>
+            <p class="subtitle lead">Playsession 1</p>
+                                <div class="quarto-categories">
+                <div class="quarto-category">zork</div>
+                <div class="quarto-category">R</div>
+              </div>
+                  </div>
   </div>
     
   
-  <div class="quarto-title-meta column-page-left">
+  <div class="quarto-title-meta">
 
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Charles T. Gray </p>
+            </div>
+    </div>
       
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">October 22, 2024</p>
+      </div>
+    </div>
     
       
     </div>
     
   
-  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(4)</span></div><div class="category" data-category="R">R <span class="quarto-category-count">(3)</span></div><div class="category" data-category="code structures">code structures <span class="quarto-category-count">(2)</span></div><div class="category" data-category="zork">zork <span class="quarto-category-count">(4)</span></div></div></div>
+    
 <!-- main -->
-<main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
+<main class="content quarto-banner-title-block" id="quarto-document-content">
 
 
 
 
 
+<p>Next playsession was all about getting the graphs into a script. But for about an hour or so I did play, and it was so satisfying seeing the graph grow as I played and collected data points.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="2024-10-22--zork-graph.png" class="img-fluid figure-img"></p>
+<figcaption>Playsession 2024-10-22</figcaption>
+</figure>
+</div>
+<p>However, I knew my next playsession would need a better data capture system. First I tried a google sheet, but hit a wall trying to read the data from the url. I think I’ll give it another try, as I like the interface for input of categorical variables.</p>
+<p>Of course, in the end, I went down a rabbit hole of prettifying the vis, and I’m reasonably happy with my efforts for one session.</p>
 
 
 
-
-<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
-<div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-categories="zork,R,code structures" data-listing-date-sort="1730242800000" data-listing-file-modified-sort="1730320891729" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="552">
-<div class="thumbnail">
-<p><a href="./posts/playsession-3/index.html" class="no-external"></a></p><a href="./posts/playsession-3/index.html" class="no-external">
-<p class="card-img-top"><img src="posts/playsession-3/index_files/figure-html/unnamed-chunk-5-1.png"  class="thumbnail-image card-img"/></p>
-</a><p><a href="./posts/playsession-3/index.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/playsession-3/index.html" class="no-external">Visual Diary</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/playsession-3/index.html" class="no-external">Playsesssion 3</a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('zork'); return false;">
-zork
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('R'); return false;">
-R
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('code structures'); return false;">
-code structures
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/playsession-3/index.html" class="no-external">This time I’m starting with data capture goddamn it. Soon I’ll be able to just play (I am aware this is hubris).</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/playsession-3/index.html" class="no-external">
-<div class="listing-date">
-Oct 30, 2024
-</div>
-<div class="listing-author">
-Charles T. Gray
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="1" data-categories="zork,R,code structures" data-listing-date-sort="1729893600000" data-listing-file-modified-sort="1730314141408" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6" data-listing-word-count-sort="1084">
-<div class="thumbnail">
-<p><a href="./posts/playsession-2/index.html" class="no-external"></a></p><a href="./posts/playsession-2/index.html" class="no-external">
-<p class="card-img-top"><img src="posts/playsession-2/index_files/figure-html/unnamed-chunk-15-1.png"  class="thumbnail-image card-img"/></p>
-</a><p><a href="./posts/playsession-2/index.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/playsession-2/index.html" class="no-external">Visual Diary</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/playsession-2/index.html" class="no-external">Playsession 2</a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('zork'); return false;">
-zork
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('R'); return false;">
-R
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('code structures'); return false;">
-code structures
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/playsession-2/index.html" class="no-external">Playsession highlights: found out I can run zork from VSC’s terminal, data capture needs to be done in googlesheets for ease of categorical variable handling.</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/playsession-2/index.html" class="no-external">
-<div class="listing-date">
-Oct 26, 2024
-</div>
-<div class="listing-author">
-Charles T. Gray
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="2" data-categories="zork,R" data-listing-date-sort="1729548000000" data-listing-file-modified-sort="1730314301245" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="112">
-<div class="thumbnail">
-<p><a href="./posts/playsession-1/index.html" class="no-external"></a></p><a href="./posts/playsession-1/index.html" class="no-external">
-<p class="card-img-top"><img src="posts/playsession-1/2024-10-22--zork-graph.png"  class="thumbnail-image card-img"/></p>
-</a><p><a href="./posts/playsession-1/index.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/playsession-1/index.html" class="no-external">Plotting Paths as Graphs</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/playsession-1/index.html" class="no-external">Playsession 1</a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('zork'); return false;">
-zork
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('R'); return false;">
-R
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/playsession-1/index.html" class="no-external">Next playsession was all about getting the graphs into a script. But for about an hour or so I did play, and it was so satisfying seeing the graph grow as I played and…</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/playsession-1/index.html" class="no-external">
-<div class="listing-date">
-Oct 22, 2024
-</div>
-<div class="listing-author">
-Charles T. Gray
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="3" data-categories="zork" data-listing-date-sort="1729461600000" data-listing-file-modified-sort="1730314145091" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="259">
-<div class="thumbnail">
-<p><a href="./posts/playsession-0/index.html" class="no-external"></a></p><a href="./posts/playsession-0/index.html" class="no-external">
-<p class="card-img-top"><img src="posts/playsession-0/zork-graph.png"  class="thumbnail-image card-img"/></p>
-</a><p><a href="./posts/playsession-0/index.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/playsession-0/index.html" class="no-external">Origin Story</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/playsession-0/index.html" class="no-external">Playsession 0</a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('zork'); return false;">
-zork
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/playsession-0/index.html" class="no-external">Zork was just a little bit before my time, and although I was an avid fan of successors of Zork, I commented I had never played it when a colleague and I were discussing…</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/playsession-0/index.html" class="no-external">
-<div class="listing-date">
-Oct 21, 2024
-</div>
-<div class="listing-author">
-Charles T. Gray
-</div>
-</a>
-</div>
-</div>
-</div>
-<div class="listing-no-matching d-none">
-No matching items
-</div>
-</div></main> <!-- /main -->
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {

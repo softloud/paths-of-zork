@@ -1,0 +1,22 @@
+---
+title: "Origin Story"
+subtitle: "Playsession 0"
+author: "Charles T. Gray"
+date: "Playsession 2024-10-21"
+categories: [zork]
+---
+
+Zork was just a little bit before my time, and although I was an avid fan of successors of Zork, I commented I had never played it when a colleague and I were discussing what we were playing. For him, it's nostalgia, he pinged me a [link](https://playclassic.games/games/adventure-dos-games-online/play-zork-great-underground-empire-online/play/) and out of curiosity I checked it out. 
+
+What blew me away about my first playsession was how immersive the game is. Nothing but text, and yet I got that rush like I did back in the eighties. My imagination flexed that unloved but well-honed muscle where the text-based interface transports me to a world where anything is possible. 
+
+These games are sort of on a grid, where you can `go west`, for example, using the text-based interface. However, locations can open up myriad pathways, such as the `cellar` in Zork, so the navigation system does not map spatially to a grid. 
+
+Directed graphs seem a good candidate as  directionality is important in terms of functionality in the game, they allow for a node to connect to different nodes in different directions. 
+
+During my first adventure, where I was eventually felled in my nth fight with the troll, I began to sketch graphs in my notebook. 
+
+I knew I'd need to plot these graphs before long, and I was right. My second playsession was dominated by developing a good enough visualisation. It was time to crack out Quarto, tidyverse, and ggraph. I need full visualisation customisation options, but with some automation for scale. This is a ggplot problem. 
+
+![playsession 1: 2024-10-21](zork-graph.png)
+

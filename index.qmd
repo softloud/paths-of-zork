@@ -9,5 +9,5 @@ listing:
   filter-ui: false
 page-layout: full
 title-block-banner: true
-
+image: 2024-10-22-zork-graph.png
 ---

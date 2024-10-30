@@ -1,0 +1,30 @@
+perspective_location	perspective_to_target	target_location
+west of house	north	north of house
+west of house	west	forest
+forest	north	clearing
+clearing	west	forest
+clearing	south	forest path
+forest path	south	north of house
+north of house	east	behind house
+behind house	south	south of house
+south of house	south	forest
+behind house	west	kitchen
+kitchen	west	living room
+kitchen	up	attic
+living room	west	inaccessible
+west of house	south	south of house
+south of house	east	behind house
+behind house	east	clearing
+clearing	east	canyon view
+canyon view	down	rocky ledge
+kitchen	down	cellar
+cellar	east	the troll room
+cellar	south	east of chasm
+east of chasm	east	gallery
+cellar	west	inaccessible
+gallery	north	studio
+studio	up	unexplored
+the troll room	east	east west passageway
+the troll room	west	maze
+east west passageway	east	unexplored
+east west passageway	down	unexplored

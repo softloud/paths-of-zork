@@ -1,0 +1,15 @@
+{
+  "hash": "ed20185ff40f91f709eac94b7c89eb72",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"Visual Diary\"  \nsubtitle: \"Playthrough 2\"\nauthor: \"Charles T. Gray\"\ndate: \"2024-10-30\"\nexecute: \n  error: true\n  message: false\n  freeze: auto\ncategories: \n  - zork\n  - R\n  - code structures\n---\n\n\nThis time I'm starting with data capture goddamn it. Soon I'll be able to just play (I am aware this is hubris). \n\n## Scrape the data from googlesheets\n\n\n::: {.cell}\n\n```{.r .cell-code}\ngooglesheets4::gs4_deauth()\n\ngs_url <- \"https://docs.google.com/spreadsheets/d/10PSDN97MdqDH_QaofhVh5Te8n4MxpYf6XJM3JsGetxI/edit?gid=1960240112#gid=1960240112\"\n\nnodes <- googlesheets4::read_sheet(gs_url, 'nodes')\n```\n\n::: {.cell-output .cell-output-stderr}\n\n```\n✔ Reading from \"zork-graph-data\".\n```\n\n\n:::\n\n::: {.cell-output .cell-output-stderr}\n\n```\n✔ Range ''nodes''.\n```\n\n\n:::\n\n```{.r .cell-code}\nnodes \n```\n\n::: {.cell-output .cell-output-stdout}\n\n```\n# A tibble: 21 × 4\n   perspective_location region interactivity                     loot           \n   <chr>                <chr>  <chr>                             <chr>          \n 1 west of house        forest solved: mailbox                   leaflet        \n 2 north of house       forest none                              none           \n 3 forest               forest song bird?                        none           \n 4 clearing             forest unsolved: pile of leaves, grating none           \n 5 forest path          forest none                              none           \n 6 behind house         forest window to house                   none           \n 7 south of house       forest none                              none           \n 8 kitchen              house  sack                              water, lunch, …\n 9 living room          house  rug, locked door to west          sword, lantern \n10 attic                house  none                              rope, knife    \n# ℹ 11 more rows\n```\n\n\n:::\n\n```{.r .cell-code}\nedges <- googlesheets4::read_sheet(gs_url, 'edges')\n```\n\n::: {.cell-output .cell-output-stderr}\n\n```\n✔ Reading from \"zork-graph-data\".\n```\n\n\n:::\n\n::: {.cell-output .cell-output-stderr}\n\n```\n✔ Range ''edges''.\n```\n\n\n:::\n\n```{.r .cell-code}\nedges\n```\n\n::: {.cell-output .cell-output-stdout}\n\n```\n# A tibble: 0 × 4\n# ℹ 4 variables: perspective_location <lgl>, perspective_to_target <lgl>,\n#   target_location <lgl>, discovered <lgl>\n```\n\n\n:::\n:::",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

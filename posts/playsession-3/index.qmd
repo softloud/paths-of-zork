@@ -1,0 +1,151 @@
+---
+title: "Visual Diary"  
+subtitle: "Playsesssion 3"
+author: "Charles T. Gray"
+date: "2024-10-30"
+execute: 
+  error: true
+  message: false
+  freeze: auto
+categories: 
+  - zork
+  - R
+  - code structures
+---
+
+This time I'm starting with data capture goddamn it. Soon I'll be able to just play (I am aware this is hubris). 
+
+## Scrape the data from googlesheets
+
+Let's see how I go with [googlesheets](https://docs.google.com/spreadsheets/d/10PSDN97MdqDH_QaofhVh5Te8n4MxpYf6XJM3JsGetxI/edit?gid=1960240112#gid=1960240112) input this playsession.
+
+```{r}
+
+googlesheets4::gs4_deauth()
+
+gs_url <- "https://docs.google.com/spreadsheets/d/10PSDN97MdqDH_QaofhVh5Te8n4MxpYf6XJM3JsGetxI/edit?gid=1960240112#gid=1960240112"
+
+zork_nodes <- googlesheets4::read_sheet(gs_url, 'nodes')
+
+head(zork_nodes, 3) 
+
+zork_edges <- googlesheets4::read_sheet(gs_url, 'edges')
+
+head(zork_edges, 3)
+
+```
+
+## Create the graph
+
+```{r, message=FALSE}
+library(tidyverse)
+library(tidygraph)
+library(ggraph)
+
+```
+
+```{r}
+
+get_zork_graph <- function(zork_edges, zork_nodes, selected_region='all') {
+
+  if (selected_region != 'all') {
+    zork_nodes <- 
+      zork_nodes |>  
+        filter(region %in% c(selected_region, 'unexplored'))
+  }
+
+  zork_base_graph <- 
+    zork_edges |> 
+      mutate(
+        from = perspective_location,
+        to = target_location
+      ) |>
+      # does order matter?
+      select(from, to, everything()) |>
+      as_tbl_graph()
+  # Join the nodes data frame to the nodes of the graph
+  zork_graph <- zork_base_graph |>
+    activate(nodes) |>
+    # add attributes to nodes
+    inner_join(zork_nodes, by = c("name" = "perspective_location"))
+
+  return(zork_graph)
+
+}
+
+get_zork_graph(zork_edges, zork_nodes)
+
+```
+
+
+```{r}
+forest_graph <- get_zork_graph(zork_edges, zork_nodes, 'forest')
+
+cellar_graph <- get_zork_graph(zork_edges, zork_nodes, 'cellar')
+
+zork_graph <- get_zork_graph(zork_edges, zork_nodes)
+
+```
+
+### Create the ggraph
+
+Back to light palette this time. 
+
+
+```{r fig.width = 12, fig.height = 20}
+
+# really must make sense of this at some point
+cols_f <- colorRampPalette(RColorBrewer::brewer.pal(8, 'Dark2'))
+
+n_regions <- nrow(zork_nodes)
+
+zork_graph |> 
+  ggraph() +
+  geom_edge_fan(
+    aes(label = perspective_to_target), 
+    label_dodge = unit(2.5, 'mm'),
+    alpha = 0.8,
+    colour = 'grey',
+    label_size = 6,
+    label_colour = 'darkgrey',
+    family = 'Courier',
+    arrow = arrow(length = unit(2, 'mm')), 
+    end_cap = circle(1, 'cm')
+  ) +
+  geom_node_text(
+    aes(
+      label = name,
+      colour = region
+    ),
+    size = 8,
+    family = 'Courier'
+  ) +
+
+  # theming
+  scale_edge_colour_manual(values = cols_f(n_regions)) + 
+  scale_colour_manual(values = cols_f(n_regions)) +
+  theme_minimal(
+    base_family = 'Courier',
+    base_size = 20
+  ) +
+  theme(
+    axis.ticks = element_blank(),
+    axis.text = element_blank(),
+    panel.grid = element_blank() #,
+    # plot.margin = margin(30, 30, 30, 30)  # Adjust plot margins
+ ) +
+     scale_x_continuous(expand = expansion(mult = 0.2)) +  # Add space around x-axis
+    scale_y_continuous(expand = expansion(mult = 0.2)) +  # Add space around y-axis
+
+  labs(
+    title = "Paths of Zork",
+    x = '',
+    y = '',
+    caption = "Angle of edge determined by ggraph, not direction"
+  )
+
+```
+
+Got murdered by the troll again, predictable.  
+
+> You clearly are a suicidal maniac.  We don't allow psychotics in the dungeon, since they may harm other adventurers.  Your remains will be installed in the land of the living dead, where your fellow adventurers may gloat over them.Your score is 35 [total of 585 points], in 71 moves. This gives you the rank of Amateur Adventurer.
