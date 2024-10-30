@@ -1,5 +1,5 @@
 ---
-title: "Visual Diary"  
+title: "Establishing edge & node data entry"  
 subtitle: "Playsesssion 3"
 author: "Charles T. Gray"
 date: "2024-10-30"
