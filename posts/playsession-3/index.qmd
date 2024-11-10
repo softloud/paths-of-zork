@@ -92,7 +92,7 @@ zork_graph <- get_zork_graph(zork_edges, zork_nodes)
 Back to light palette this time. 
 
 
-```{r fig.width = 12, fig.height = 20}
+```{r fig.width = 12, fig.height = 15}
 
 # really must make sense of this at some point
 cols_f <- colorRampPalette(RColorBrewer::brewer.pal(8, 'Dark2'))

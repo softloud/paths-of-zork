@@ -1,0 +1,303 @@
+---
+title: "Define some functions"  
+subtitle: "Playsesssion 4"
+author: "Charles T. Gray"
+date: "2024-11-10"
+execute: 
+  error: true
+  message: false
+  freeze: auto
+categories: 
+  - zork
+  - R
+---
+
+> Playsession highlight: still haven't cracked the operators or there is no way to combine the lunch with the nasty knife.
+
+```
+>open sack          
+Opening the brown sack reveals:
+  A clove of garlic.
+  A lunch.
+>hide knife in lunch
+I don't understand that.
+>look at lunch
+I see nothing special about the lunch.
+>put knife in bottle
+I can't reach inside.
+>use knife on lunch
+I don't understand that.
+>use knife with lunch
+I don't understand that.
+>combine knife and lunch
+I don't understand that.
+
+```
+
+Have repeated enough to want some helper functions now. Will draft them in this post, but I suppose next play session I suppose I'll need to be packaging it. 
+
+
+## get data function
+
+
+```{r}
+get_nodes_and_edges_raw <- function() {
+
+  googlesheets4::gs4_deauth()
+
+  gs_url <- "https://docs.google.com/spreadsheets/d/10PSDN97MdqDH_QaofhVh5Te8n4MxpYf6XJM3JsGetxI/edit?gid=1960240112#gid=1960240112"
+  
+  message('\n*** zork nodes ***\n')
+  zork_nodes <- googlesheets4::read_sheet(gs_url, 'nodes')
+  print(head(zork_nodes, 3))
+
+  message('\n*** zork edges ***\n')
+  zork_edges <- googlesheets4::read_sheet(gs_url, 'edges')
+  print(head(zork_edges, 3))
+
+  return(
+    list(
+      zork_nodes = zork_nodes,
+      zork_edges = zork_edges
+    )
+  )
+} 
+
+```
+
+
+```{r}
+# print() doesn't respect newline even with escape, but message handles newline
+# Also learnt, use message() for the text, but use print() for structured data 
+zork_nodes_and_edges <- get_nodes_and_edges_raw()
+
+```
+
+## zork graph function
+
+
+```{r}
+create_zork_graph <- function(zork_nodes_and_edges, selected_region = 'all') {
+  zork_nodes <- zork_nodes_and_edges$zork_nodes
+  zork_edges <- zork_nodes_and_edges$zork_edges
+
+   if (selected_region != 'all') {
+    zork_nodes <- 
+      zork_nodes |>  
+        dplyr::filter(region %in% c(selected_region, 'unexplored'))
+  }
+
+  zork_base_graph <- 
+    zork_edges |> 
+      dplyr::mutate(
+        from = perspective_location,
+        to = target_location
+      ) |>
+      # does order matter?
+      dplyr::select(from, to, everything()) |>
+      tidygraph::as_tbl_graph()
+  # Join the nodes data frame to the nodes of the graph
+  zork_graph <- zork_base_graph |>
+    tidygraph::activate(nodes) |>
+    # add attributes to nodes
+    dplyr::inner_join(zork_nodes, by = c("name" = "perspective_location"))
+
+  print(zork_graph)
+
+  # report regions discovered
+  message('\n*** zork regions discovered (zork_ggraph selected_region) ***\n')
+  print(
+    zork_nodes |>
+      dplyr::filter(!(region %in% c('unexplored', 'inaccessible'))) |>
+      dplyr::pull(region) |>
+      unique()
+
+  )
+  message('\n***\n')
+
+  return(zork_graph)
+
+}
+
+```
+
+
+
+```{r}
+zork_graph <- create_zork_graph(zork_nodes_and_edges)
+
+
+```
+
+
+## zork ggraph
+
+```{r}
+zork_ggraph <- function(zork_nodes_and_edges, region = 'all') {
+  zork_graph <- create_zork_graph(zork_nodes_and_edges, region)
+
+  cols_f <- colorRampPalette(RColorBrewer::brewer.pal(8, 'Dark2'))
+
+  n_regions <- zork_nodes_and_edges$zork_nodes |> 
+    dplyr::pull(region) |>
+    unique() |>
+    length()
+
+  zork_graph |> 
+    ggraph::ggraph() +
+    ggraph::geom_edge_fan(
+      ggplot2::aes(label = perspective_to_target), 
+      label_dodge = ggplot2::unit(2.5, 'mm'),
+      alpha = 0.8,
+      colour = 'grey',
+      label_size = 6,
+      label_colour = 'darkgrey',
+      family = 'Courier',
+      arrow = ggplot2::arrow(length = ggplot2::unit(2, 'mm')), 
+      end_cap = ggraph::circle(1, 'cm')
+    ) +
+    ggraph::geom_node_text(
+      ggplot2::aes(
+        label = name,
+        colour = region
+      ),
+      repel = TRUE,
+      size = 8,
+      family = 'Courier'
+    ) +
+
+    # theming
+    ggraph::scale_edge_colour_manual(values = cols_f(n_regions)) + 
+    ggplot2::scale_colour_manual(values = cols_f(n_regions)) +
+    ggplot2::theme_minimal(
+      base_family = 'Courier',
+      base_size = 20
+    ) +
+    ggplot2::theme(
+      axis.ticks = ggplot2::element_blank(),
+      axis.text = ggplot2::element_blank(),
+      panel.grid = ggplot2::element_blank() #,
+      # plot.margin = margin(30, 30, 30, 30)  # Adjust plot margins
+  ) +
+      ggplot2::scale_x_continuous(expand = ggplot2::expansion(mult = 0.2)) +  # Add space around x-axis
+      ggplot2::scale_y_continuous(expand = ggplot2::expansion(mult = 0.2)) +  # Add space around y-axis
+
+    ggplot2::labs(
+      title = "Paths of Zork",
+      x = '',
+      y = '',
+      caption = "Angle of edge determined by ggraph, not direction"
+    )
+
+
+}
+
+```
+
+
+## playsession
+
+Today I'm impatient to get to the cellar and try out putting the `nasty knife` in the food I find in the sack and I should try talking to the troll. 
+
+### get to the cellar
+
+I'll note what I haven't explored and get to the cellar.
+
+```{r fig.height = 12, fig.width = 12}
+zork_ggraph(zork_nodes_and_edges, 'forest')
+```
+
+### get to the troll
+
+Make a beeline for the troll.
+
+```{r fig.height = 20, fig.width = 12}
+zork_ggraph(zork_nodes_and_edges, 'cellar')
+```
+
+### overview
+
+```{r fig.height = 20, fig.width = 12}
+zork_ggraph(zork_nodes_and_edges)
+```
+
+
+### lost in the maze
+
+In this playsession, I ended up in a maze twice, so I think I've found a new region.
+
+```
+>go south
+You are in a narrow east-west passageway.  There is a narrow staircase
+leading down at the north end of the room.
+>go down
+You are in a deep ravine at a crossing with an east-west crawlway.
+Some stone steps are at the south of the ravine and a steep staircase
+descends.
+>look
+You are in a deep ravine at a crossing with an east-west crawlway.
+Some stone steps are at the south of the ravine and a steep staircase
+descends.
+>go south
+You are in a narrow east-west passageway.  There is a narrow staircase
+leading down at the north end of the room.
+>go east
+You are in a circular room with passages off in eight directions.
+Your compass needle spins wildly, and you cannot get your bearings.
+>look
+You are in a circular room with passages off in eight directions.
+Your compass needle spins wildly, and you cannot get your bearings.
+>go west
+Unfortunately, it is impossible to tell directions in here.
+You are in a maze of twisty little passages, all alike.
+>go east
+You are in a maze of twisty little passages, all alike.
+>go north
+You are in a maze of twisty little passages, all alike.
+>go north
+You are in a maze of twisty little passages, all alike.
+>go south
+You are in a maze of twisty little passages, all alike.
+>go south
+You are in a maze of twisty little passages, all alike.
+>go south
+You are in a maze of twisty little passages, all alike.
+>go south
+You are in a maze of twisty little passages, all alike.
+>go south
+You are in a maze of twisty little passages, all alike.
+>go south
+You are in a maze of twisty little passages, all alike.
+>go south
+You are in a maze of twisty little passages, all alike.
+>go south
+You are in a maze of twisty little passages, all alike.
+>go south
+You are in a maze of twisty little passages, all alike.
+>go south
+You are in a maze of twisty little passages, all alike.
+>go east
+You are in a maze of twisty little passages, all alike.
+>go east
+Dead end.
+>go north
+There is a wall there.
+>go south
+You are in a maze of twisty little passages, all alike.
+>go east
+Dead end.
+>go west
+There is a wall there.
+>go south
+You are in a maze of twisty little passages, all alike.
+>go east
+Dead end.
+>go west
+There is a wall there.
+>go south
+You are in a maze of twisty little passages, all alike.
+>go east
+Dead end.
+>go west
+There is a wall there.
+```
